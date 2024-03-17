@@ -1,0 +1,53 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h2>Страница авторизованного пользователя {{request.user.username}}</h2>
+  <h1>Ваши объявления и отклики: </h1>
+   {% if test%}
+       <table>
+           {% for i in posts %}
+           <hr>
+           <tr>
+               <td>{{ i }}</td>
+               <td><button> <a href='/posts/{{i.id}}'> Читать</a> </button><td>
+           </tr>
+            <table>
+           {% for b in res %}
+           <tr>
+               {% if b.post.id == i.id%}
+               <td>{{ b }}</td>
+               <td><button> <a href='/posts/{{b.id}}/res_update/'> Изменить статус</a> </button><td>
+               {% endif %}
+           </tr>
+           {% endfor %}
+       </table>
+           {% endfor %}
+<hr>
+
+       </table>
+   {% else %}
+       <h2>Объявлений нет!</h2>
+   {% endif %}
+
+<button> <a href="sign/logout/">Выйти</a> </button>
+<button> <a href="posts/">Главная страница</a> </button>
+{% if page_obj.has_previous %}
+       <a href="?page=1">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {# Информация о текущей странице #}
+   {{ page_obj.number }}
+
+   {# Информация о следующих страницах #}
+   {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+{% endblock %}

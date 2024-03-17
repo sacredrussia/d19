@@ -1,0 +1,43 @@
+<!--  наследуемся от шаблона default.html, который мы создавали для flatpages -->
+{% extends 'flatpages/default.html' %}
+{% block title %}
+Post
+{% endblock title %}
+
+{% block content %}
+{% if post.photo%}
+               <p><img class="img-article-left" src="{{post.photo.url}}"></p>
+               {% endif %}
+{% if post.photo2%}
+               <p><img class="img-article-left" src="{{post.photo2.url}}"></p>
+               {% endif %}
+{% if post.video%}
+{% load embed_video_tags %}
+{% video post.video as my_video %}
+  {% video my_video "small" %}
+{% endvideo %}
+{% endif %}
+{% if post.video2%}
+{% load embed_video_tags %}
+{% video post.video2 as my_video2 %}
+  {% video my_video2 "small" %}
+{% endvideo %}
+{% endif %}
+<h1>{{ post }}</h1>
+<button> <a href='/posts/{{post.id}}/res_create'> Добавить отклик</a> </button>
+<h3>Отклики:</h3>
+   {% if c%}
+       <table>
+           {% for i in x %}
+           <tr>
+               <td>{{ i }}</td>
+           </tr>
+           {% endfor %}
+       </table>
+   {% else %}
+       <h2>Откликов пока нет!</h2>
+   {% endif %}
+{% if is_user %}
+<button> <a href='/posts/{{post.id}}/update'> Редактировать объявление</a> </button>
+{% endif %}
+{% endblock content %}
