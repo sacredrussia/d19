@@ -12,11 +12,15 @@
                <td><button> <a href='/posts/{{i.id}}'> Читать</a> </button><td>
            </tr>
             <table>
-           {% for b in res %}
+           {% for b in res1 %}
            <tr>
                {% if b.post.id == i.id%}
+               {% if b.status != dl%}
                <td>{{ b }}</td>
-               <td><button> <a href='/posts/{{b.id}}/res_update/'> Изменить статус</a> </button><td>
+               {%if b.status == nw%}
+                   <td><button> <a href='/posts/{{b.id}}/res_update/'> Изменить статус</a> </button><td>
+               {% endif %}
+               {% endif %}
                {% endif %}
            </tr>
            {% endfor %}

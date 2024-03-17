@@ -17,14 +17,19 @@ class IndexView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         user = self.request.user.id
         resp_list = [Responses.objects.filter(status='NW')]
+        resp_list1 = [Responses.objects.filter()]
         post_list = [Post.objects.filter(author=user)]
         x, *b = post_list
         c, *a = resp_list
+        h, *j = resp_list1
+        context['nw'] = 'NW'
+        context['dl'] = 'DL'
         context['test'] = False
         if len(x) > 0:
             context['test'] = True
             context['posts'] = x
             context['res'] = c
+            context['res1'] = h
         return context
 
 
