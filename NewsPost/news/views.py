@@ -19,7 +19,7 @@ class PostsList(ListView):
     ordering = 'time_creation'
     template_name = 'posts.html'
     context_object_name = 'posts'
-    paginate_by = 6
+    paginate_by = 4
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

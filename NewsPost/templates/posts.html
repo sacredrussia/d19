@@ -3,38 +3,34 @@
 {% block title %}
 Posts
 {% endblock title %}
-
 {% block content %}
+<div class="text-center">
    <h1>Все объявления</h1>
    <h3>{{ time_now|date:'M d Y' }}</h3>
-   <hr>
+    </div>
    {% if posts%}
-       <table>
-           <tr>
-               <td>Название</td>
-               <td>Текст</td>
-               <td>Категория</td>
-               <td>Время публикации</td>
-
-           </tr>
-
            {% for post in posts %}
-           <tr>
-               <td>{{ post.title }}</td>
-               <td>{{ post.text|truncatechars:15 }}</td>
-               <td>{{ post.category.category }}</td>
-               <td>{{ post.time_creation }}</td>
+<div class="dashed1"></div>
+            <div class="row1">
+                <div class="body1">
+                    <a href='/posts/{{post.id}}' class="no-decoration">
+                        <div class="title1"><h5>{{ post.title }}</h5></div>
+                    <div class="text1">{{ post.text|truncatechars:550 }}</div>
+                     <div class="cat1">категория: {{ post.category.category }}</div>
+                <div class="dat1">дата создания: {{ post.time_creation }}</div>
                {% if post.photo%}
-               <td><p><img class="img-article-left thumb" src="{{post.photo.url}}"></p></td>
+                        <div class="picture-box">
+                   <img class="" width="240" height="144" src="{{post.photo.url}}">
                {% endif %}
-               <td><button> <a href='/posts/{{post.id}}'> Читать</a> </button><td>
-           </tr>
+                    </div>
+                    </a>
+            </div>
+                </div>
            {% endfor %}
-
-       </table>
    {% else %}
        <h2>Объявлений нет!</h2>
    {% endif %}
+<div class="text-center mt-5">
 {% if page_obj.has_previous %}
        <a href="?page=1">1</a>
        {% if page_obj.previous_page_number != 1 %}
@@ -54,5 +50,5 @@ Posts
            <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
        {% endif %}
    {% endif %}
-
+</div>
 {% endblock content %}

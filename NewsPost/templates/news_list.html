@@ -5,6 +5,7 @@ News
 {% endblock title %}
 
 {% block content %}
+<div class="text-center">
 {% if is_user %}
 <button> <a href='/posts/news/create'> Создать новость</a> </button>
 {% endif %}
@@ -52,5 +53,5 @@ News
            <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
        {% endif %}
    {% endif %}
-
+</div>
 {% endblock content %}

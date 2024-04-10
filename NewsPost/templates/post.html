@@ -5,11 +5,12 @@ Post
 {% endblock title %}
 
 {% block content %}
+<div class="text-center">
 {% if post.photo%}
-               <p><img class="img-article-left" src="{{post.photo.url}}"></p>
+               <p><img width="400" height="400" src="{{post.photo.url}}"></p>
                {% endif %}
 {% if post.photo2%}
-               <p><img class="img-article-left" src="{{post.photo2.url}}"></p>
+               <p><img width="400" height="400" src="{{post.photo2.url}}"></p>
                {% endif %}
 {% if post.video%}
 {% load embed_video_tags %}
@@ -40,4 +41,5 @@ Post
 {% if is_user %}
 <button> <a href='/posts/{{post.id}}/update'> Редактировать объявление</a> </button>
 {% endif %}
+    </div>
 {% endblock content %}
